@@ -1,0 +1,439 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* ==================== STADIUM LIGHTS (DARK MODE) ==================== */
+  --bg-primary: #06090F;
+  --bg-radial: radial-gradient(circle at top, rgba(167, 139, 250, 0.04) 0%, #06090F 80%);
+  
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-bg-hover: rgba(255, 255, 255, 0.05);
+  --card-border-hover: rgba(255, 255, 255, 0.12);
+  
+  /* Text Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  
+  /* Premium Soft Accent Colors */
+  --accent-emerald: #4ADE80;
+  --accent-emerald-glow: rgba(74, 222, 128, 0.15);
+  --accent-violet: #A78BFA;
+  --accent-violet-glow: rgba(167, 139, 250, 0.15);
+  --accent-orange: #FB923C;
+  --accent-orange-glow: rgba(251, 146, 60, 0.15);
+  
+  --color-danger: #F87171;
+  --color-danger-glow: rgba(248, 113, 113, 0.15);
+
+  --bg-input: #0A0E17;
+  --border-input: rgba(255, 255, 255, 0.08);
+}
+
+.light {
+  /* ==================== DAY MATCH (LIGHT MODE) ==================== */
+  --bg-primary: #F8FAFC; /* Slate 50 */
+  --bg-radial: radial-gradient(circle at top, rgba(139, 92, 246, 0.03) 0%, #F8FAFC 85%);
+  
+  --card-bg: #FFFFFF;
+  --card-border: rgba(15, 23, 42, 0.08);
+  --card-bg-hover: #F1F5F9; /* Slate 100 */
+  --card-border-hover: rgba(15, 23, 42, 0.16);
+  
+  /* Text Colors (High Contrast Slate) */
+  --text-primary: #0F172A; /* Slate 900 */
+  --text-secondary: #334155; /* Slate 700 */
+  --text-muted: #64748B; /* Slate 500 */
+  
+  /* Bright Contrast Colors */
+  --accent-emerald: #059669; /* Rich Emerald */
+  --accent-emerald-glow: rgba(5, 150, 105, 0.1);
+  --accent-violet: #7C3AED; /* Rich Violet */
+  --accent-violet-glow: rgba(124, 58, 237, 0.1);
+  --accent-orange: #EA580C; /* Rich Orange */
+  --accent-orange-glow: rgba(234, 88, 12, 0.1);
+  
+  --color-danger: #DC2626; /* Deep Red */
+  --color-danger-glow: rgba(220, 38, 38, 0.1);
+
+  --bg-input: #FFFFFF;
+  --border-input: rgba(15, 23, 42, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
+}
+
+body {
+  background: var(--bg-primary);
+  background-image: var(--bg-radial);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+/* Custom Scrollbars (Minimalist) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.4);
+}
+
+/* ==================== THEME STYLING UTILITIES ==================== */
+.bg-primary-theme {
+  background-color: var(--bg-primary) !important;
+}
+.text-primary-theme {
+  color: var(--text-primary) !important;
+}
+.text-secondary-theme {
+  color: var(--text-secondary) !important;
+}
+.text-muted-theme {
+  color: var(--text-muted) !important;
+}
+.border-theme {
+  border-color: var(--card-border) !important;
+}
+.card-theme {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+}
+.bg-input-theme {
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--border-input) !important;
+}
+
+/* Premium SaaS Cards (Sleek, blur-intensive, subtle outlines) */
+.stadium-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.stadium-card:hover {
+  background-color: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+  transform: translateY(-2px);
+}
+
+/* Accent Borders (Not heavy glows) */
+.glow-emerald {
+  border-color: rgba(74, 222, 128, 0.15);
+}
+.glow-emerald:hover {
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.glow-violet {
+  border-color: rgba(167, 139, 250, 0.15);
+}
+.glow-violet:hover {
+  border-color: rgba(167, 139, 250, 0.3);
+}
+
+.glow-orange {
+  border-color: rgba(251, 146, 60, 0.15);
+}
+.glow-orange:hover {
+  border-color: rgba(251, 146, 60, 0.3);
+}
+
+/* Soft Live Indicator */
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  color: var(--accent-emerald);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--accent-emerald);
+  animation: pulse-live 2s infinite ease-in-out;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Loading Skeletons (Sleek gradient) */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(120, 120, 120, 0.02) 25%, rgba(120, 120, 120, 0.08) 50%, rgba(120, 120, 120, 0.02) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s infinite linear;
+  border-radius: 6px;
+}
+
+/* Premium Action Buttons (Rounded Full, scale transitions) */
+.action-btn {
+  background: linear-gradient(135deg, var(--accent-violet) 0%, #6366F1 100%);
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(167, 139, 250, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(167, 139, 250, 0.35);
+  filter: brightness(1.05);
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+.action-btn:disabled {
+  background: rgba(120, 120, 120, 0.1);
+  color: var(--text-muted) !important;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+/* Minimal pill buttons */
+.pill-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pill-btn:hover {
+  background-color: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+  color: var(--text-primary);
+  transform: scale(1.03);
+}
+
+.pill-btn:active {
+  transform: scale(0.98);
+}
+
+/* Staggered card fade animation */
+@keyframes stagger-fade-in-blur {
+  0% { transform: translateY(12px); opacity: 0; filter: blur(4px); }
+  100% { transform: translateY(0); opacity: 1; filter: blur(0); }
+}
+
+.ai-output-stagger {
+  animation: stagger-fade-in-blur 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+/* Circular Emoji Interactions (Minimal SaaS styling) */
+.circular-react-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.circular-react-btn:hover {
+  transform: scale(1.1);
+  background-color: var(--card-bg-hover);
+  border-color: var(--card-border-hover);
+  color: var(--text-primary);
+}
+
+.circular-react-btn:active {
+  transform: scale(0.95);
+}
+
+/* Atmosphere Equalizer */
+@keyframes bar-bounce {
+  0%, 100% { height: 10%; }
+  50% { height: 75%; }
+}
+
+.eq-bar {
+  width: 3px;
+  background-color: var(--accent-violet);
+  border-radius: 1px;
+  transition: height 0.3s ease;
+}
+
+.eq-bar.active {
+  animation: bar-bounce 0.6s infinite ease-in-out;
+}
+
+.eq-bar:nth-child(2) { animation-delay: 0.1s; background-color: var(--accent-orange); }
+.eq-bar:nth-child(3) { animation-delay: 0.2s; background-color: var(--accent-emerald); }
+.eq-bar:nth-child(4) { animation-delay: 0.15s; background-color: var(--accent-violet); }
+.eq-bar:nth-child(5) { animation-delay: 0.3s; background-color: var(--accent-emerald); }
+
+/* Score Overlay alerts with minimal SaaS aesthetics */
+@keyframes fade-in-backdrop {
+  0% { opacity: 0; backdrop-filter: blur(0); }
+  100% { opacity: 1; backdrop-filter: blur(8px); }
+}
+
+.alert-backdrop {
+  animation: fade-in-backdrop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes alert-card-scale {
+  0% { transform: scale(0.96) translateY(8px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.alert-card-animate {
+  animation: alert-card-scale 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==================== CRICKET PITCH ANIMATIONS ==================== */
+@keyframes draw-path {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ball-path-six {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-path 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.ball-path-four {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-path 1.2s ease-out forwards;
+}
+
+.ball-path-wicket {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-path 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+@keyframes ball-spin-glow {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.4;
+    filter: drop-shadow(0 0 2px var(--accent-orange));
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--accent-orange));
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 4px var(--accent-orange));
+  }
+}
+
+.ball-impact-pulse {
+  animation: ball-spin-glow 1s infinite ease-in-out alternate;
+}
+
+@keyframes fly-off-stump-left {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(-30px, -60px) rotate(-120deg); opacity: 0; }
+}
+
+@keyframes fly-off-stump-right {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(30px, -60px) rotate(120deg); opacity: 0; }
+}
+
+@keyframes fly-off-bail {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(0, -90px) rotate(360deg); opacity: 0; }
+}
+
+.wicket-flying-left {
+  animation: fly-off-stump-left 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+.wicket-flying-right {
+  animation: fly-off-stump-right 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+.bail-flying {
+  animation: fly-off-bail 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
